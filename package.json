@@ -1,0 +1,21 @@
+{
+  "name": "apocalyptic-institucional",
+  "private": true,
+  "version": "0.4.0",
+  "type": "module",
+  "description": "Site estático APOCALYPTIC. Dependências usadas somente nas verificações locais.",
+  "scripts": {
+    "dev": "node tools/preview.mjs",
+    "check": "node --check js/main.js",
+    "test:static": "node --test tests/static.test.mjs",
+    "test:browser": "node --test --test-concurrency=1 tests/site.test.mjs",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "playwright": "1.65.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
