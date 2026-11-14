@@ -52,7 +52,9 @@ Não foram criados clientes, depoimentos, certificações, estatísticas ou capa
 | Cabeçalhos | CSP, `nosniff` e `DENY` preservados e servidos na prévia local. |
 | Suíte Playwright local | Não iniciou o navegador: Chromium encerrou ao tentar criar um socket interno bloqueado pelo ambiente. Não há resultado funcional ou axe aprovado dessa execução. |
 | Acesso do navegador compartilhado ao localhost | Conexão recusada. O navegador e o servidor de execução não compartilharam o acesso por loopback. |
-| CI e prévia da PR | A verificar após criação da PR; não presumir aprovação nem publicação. |
+| CI inicial | 36 testes executados: 32 aprovados e 4 falhas de reflow ligadas ao mesmo transbordamento da home. Correção preparada e nova execução pendente. |
+| Prévia da PR | `https://cf353035.apocalyptic.pages.dev/`, commit `013367632c3e3ee631c02fff1d56b0c7176080fd`, confirmada pela integração. Revisão visual de desktop realizada. |
+| Teclado com zoom de 400% | Cinco links do menu alcançados por Tab dentro da área visível; Escape fechou o painel e restaurou o foco ao botão. Teste no Chrome compartilhado em 340 × 234 CSS px. |
 
 A suíte preparada cobre seis páginas, larguras de 320, 390, 768 e 1366 px, a regressão de 340 × 234 px, teclado, foco, Escape, menu aberto, JavaScript desativado, movimento reduzido, FAQ e regras automáticas do axe para WCAG 2.2 AA.
 
