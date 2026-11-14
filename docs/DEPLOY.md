@@ -1,9 +1,14 @@
 # Publicação — APOCALYPTIC
 
-Estado: não publicado.
+**Estado:** não publicado; branch de desenvolvimento aguardando revisão.
 
-Destino previsto: Cloudflare Pages com GitHub.
+## Cloudflare Pages (configuração planejada)
+- Framework preset: nenhum (site estático).
+- Build command: vazio.
+- Diretório de saída: raiz do repositório.
+- Branch de produção: `main` apenas após aprovação.
+- Arquivo `_headers` inclui CSP e cabeçalhos de segurança.
 
-Antes de publicar: validar conteúdo, identidade visual, links de contato, layout móvel, segurança e privacidade.
+Antes de publicar: validar conteúdo, identidade visual, canal comercial, acessibilidade, navegação móvel, responsividade, segurança e privacidade. Não usar a branch de desenvolvimento como produção por engano.
 
-A publicação exigirá configuração explícita no projeto da Cloudflare. Nenhum domínio ou deploy foi configurado nesta etapa.
+Não há domínio próprio nem deploy configurado por estas alterações.
