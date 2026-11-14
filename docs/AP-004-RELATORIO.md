@@ -36,37 +36,58 @@ Não foram criados clientes, depoimentos, certificações, estatísticas ou capa
 - `package.json`, `package-lock.json`: ferramentas somente de desenvolvimento.
 - `.github/workflows/quality.yml`: verificações de PR sem publicação.
 - `README.md`, `docs/DEPLOY.md`, `docs/ESCOPO.md`, este relatório: estado, escopo e limites.
+- `docs/screenshots/ap-004-inicio.jpg`: captura da prévia para revisão visual.
 
 `assets/logo.svg`, `assets/favicon.svg` e `_headers` permanecem iguais à base.
 
-## Resultados obtidos até a preparação da PR
+## Links para revisão
 
-| Verificação | Resultado |
+- [Pull Request #3 — em rascunho, sem merge](https://github.com/bacharelado/-apocalyptic-site/pull/3).
+- [Prévia de desenvolvimento da branch](https://feat-ap-004-evolucao-corpora.apocalyptic.pages.dev/).
+- [Prévia imutável do código validado](https://9c9391c6.apocalyptic.pages.dev/).
+- [CI aprovada — 36 testes](https://github.com/bacharelado/-apocalyptic-site/actions/runs/43632034798).
+
+Código validado pela CI: `c2d332b312b6d7ef804dcd6ae0368a33061212bd`. A atualização final deste relatório e a inclusão da captura não alteram HTML, CSS, JavaScript, testes ou configuração de execução.
+
+## Resultados finais
+
+| Verificação | Resultado efetivo |
 | --- | --- |
-| `npm run check` | Aprovado: sintaxe do JavaScript. |
-| `npm run test:static` | 11 testes aprovados, 0 falhas. |
+| `npm run check` | Aprovado localmente e na CI: sintaxe do JavaScript. |
+| `npm run test:static` | 11 testes locais aprovados; incluídos na execução completa da CI. |
+| `npm test` na CI | **36 aprovados, 0 falhas, 0 ignorados**, execução `43632034798`. |
+| Reflow | Seis páginas testadas em 320×568, 390×844, 768×1024, 1366×768 e 340×234 CSS px; sem transbordamento horizontal nos critérios testados. |
+| axe / WCAG 2.2 AA | Nenhuma violação detectada pelas regras selecionadas nas seis páginas e no menu aberto em mobile. Isso não certifica conformidade integral com WCAG. |
+| Teclado e foco | Tab, saída do menu sem aprisionamento, Escape com restauração de foco, link de salto e transições entre breakpoints aprovados na CI. |
+| Sem JavaScript | Navegação e conteúdo das seis páginas aprovados em 320 px; FAQ nativa operável com teclado. |
+| Movimento reduzido | Sem animações/transições e sem rolagem suave no cenário automatizado. |
+| Contatos | Número, mensagem, e-mail, assunto e `noopener noreferrer` preservados e verificados. Não foram enviadas mensagens. |
 | SVGs e favicon | Hash de blob original preservado: `790e86c51cdd37d5cc6890511c17ab28475e96b0`. |
-| Links e recursos locais | Destinos internos responderam corretamente no servidor de desenvolvimento. |
-| Contraste calculado | Combinações de texto do tema atingiram pelo menos 4,5:1; foco e borda de controle testados a partir de 3:1. |
-| 404 e sitemap | 404 real e XML com cinco endereços confirmados no servidor local. |
-| Cabeçalhos | CSP, `nosniff` e `DENY` preservados e servidos na prévia local. |
-| Suíte Playwright local | Não iniciou o navegador: Chromium encerrou ao tentar criar um socket interno bloqueado pelo ambiente. Não há resultado funcional ou axe aprovado dessa execução. |
-| Acesso do navegador compartilhado ao localhost | Conexão recusada. O navegador e o servidor de execução não compartilharam o acesso por loopback. |
-| CI inicial | 36 testes executados: 32 aprovados e 4 falhas de reflow ligadas ao mesmo transbordamento da home. Correção preparada e nova execução pendente. |
-| Prévia da PR | `https://cf353035.apocalyptic.pages.dev/`, commit `013367632c3e3ee631c02fff1d56b0c7176080fd`, confirmada pela integração. Revisão visual de desktop realizada. |
-| Teclado com zoom de 400% | Cinco links do menu alcançados por Tab dentro da área visível; Escape fechou o painel e restaurou o foco ao botão. Teste no Chrome compartilhado em 340 × 234 CSS px. |
+| Links, recursos e cabeçalhos | Destinos internos, carregamento de imagens, ausência de erros da página no cenário testado, CSP, `nosniff` e `DENY` aprovados no servidor de teste. |
+| 404 e sitemap | 404 real e XML com cinco URLs aprovados no servidor de teste. Na prévia da hospedagem, a página de erro abriu e o navegador reconheceu o sitemap como `application/xml`. |
+| Revisão visual da prévia | Cinco páginas examinadas em desktop; cinco páginas navegadas em zoom de 400%, com viewport 340×234 e largura de conteúdo igual à largura útil de 337 px. FAQ acionada por teclado. |
+| Menu na prévia | Cinco links alcançados por Tab dentro da área visível com zoom de 400%; Escape fechou o painel e devolveu o foco ao botão. |
+| Inicialização de Chromium local | Bloqueada por restrição de socket do ambiente. A suíte completa foi executada de fato na CI, em ambiente que permitiu iniciar Chromium. |
+| Requisições HTTP diretas à hospedagem | Receberam 403 pelo caminho de requisições do ambiente; não se atribuiu a origem do bloqueio nem se certificaram cabeçalhos privados da hospedagem por essa via. A prévia foi navegada com sucesso no navegador disponível. |
 
-A suíte preparada cobre seis páginas, larguras de 320, 390, 768 e 1366 px, a regressão de 340 × 234 px, teclado, foco, Escape, menu aberto, JavaScript desativado, movimento reduzido, FAQ e regras automáticas do axe para WCAG 2.2 AA.
+Ferramentas de teste: Playwright `1.65.1` e axe-core `4.14.0`; dependências apenas de desenvolvimento. Nenhuma biblioteca de teste é carregada pelos visitantes.
+
+O transbordamento encontrado pela primeira rodada da CI foi corrigido mantendo separadores entre as palavras do cartão A/4 no mobile. O teste de mudança de viewport aguarda o estado ARIA da navegação antes de continuar, evitando duas mudanças coalescidas na mesma frame. A rodada final aprovou todos os testes.
+
+## Registro visual
+
+![Página inicial AP-004 na prévia de desenvolvimento](screenshots/ap-004-inicio.jpg)
+
+Captura real da primeira área visível em computador. A fonte, o logotipo e o conteúdo não foram retocados.
 
 ## Riscos e validações pendentes
 
 - Confirmar com o fundador que o número informado recebe mensagens no WhatsApp. O número de oito dígitos foi preservado sem adaptação por suposição.
 - Confirmar abertura do aplicativo de e-mail e recebimento no dispositivo do responsável.
-- Executar ou obter o resultado real da suíte de navegador em ambiente que permita iniciar Chromium.
 - Validar com leitores de tela, aparelhos reais e navegadores adicionais antes de afirmar conformidade integral com WCAG.
-- Confirmar o comportamento de 404, sitemap e cabeçalhos na prévia da hospedagem; o servidor local não certifica a configuração privada do provedor.
+- Confirmar os cabeçalhos efetivos da hospedagem por um caminho HTTP autorizado e representativo. A configuração privada do provedor não foi acessada.
 - Revisar o texto e a viabilidade real do serviço com o fundador.
-- Revisar a integração da AP-003 e da AP-004 antes de qualquer aprovação de produção.
+- Revisar a integração da AP-003 e da AP-004 antes de qualquer aprovação de produção. A PR permanece em rascunho.
 
 ## Segurança e publicação
 
