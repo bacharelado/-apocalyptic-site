@@ -221,9 +221,15 @@ test('o menu sincroniza corretamente as mudanças entre celular e computador', a
     const button = page.getByRole('button', { name: 'Menu principal', exact: true });
     await button.click();
     await page.setViewportSize({ width: 1366, height: 768 });
+    // A mudança de media query é entregue de forma assíncrona pelo navegador.
+    // Esperar o estado observável evita coalescer duas mudanças na mesma frame.
+    await page.waitForFunction(() =>
+      document.querySelector('.menu-toggle').getAttribute('aria-expanded') === 'false');
     assert.equal(await page.locator('.site-nav').isVisible(), true);
     assert.equal(await page.locator('.menu-toggle').isVisible(), false);
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForFunction(() =>
+      getComputedStyle(document.querySelector('.site-nav')).display === 'none');
     assert.equal(await button.getAttribute('aria-expanded'), 'false');
     assert.equal(await page.locator('.site-nav').isVisible(), false);
   });
